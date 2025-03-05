@@ -1,40 +1,17 @@
-import { StatusBar } from "expo-status-bar";
-import {
-  SafeAreaView,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  TouchableWithoutFeedback,
-  Keyboard,
-  View,
-} from "react-native";
-import Input from "./components/Input";
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
+import HomeScreen from "./views/HomeScreen";
+import LoginScreen from "./views/LoginScreen";
 
 export default function App() {
+  const Stack = createStackNavigator();
+
   return (
-    <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
-      <SafeAreaView style={styles.container}>
-        <Text style={styles.title}>Đăng nhập</Text>
-        <Input />
-      </SafeAreaView>
-    </TouchableWithoutFeedback>
+    <NavigationContainer>
+      <Stack.Navigator screenOptions={{ headerShown: false }}>
+        <Stack.Screen name="LoginScreen" component={LoginScreen} />
+        <Stack.Screen name="HomeScreen" component={HomeScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    justifyContent: "center",
-    padding: 20,
-  },
-  title: {
-    fontWeight: 700,
-    fontSize: 25,
-    paddingHorizontal: 30,
-    paddingVertical: 20,
-    marginBottom: 30,
-    borderBottomColor: "black",
-    borderBottomWidth: 1,
-  },
-});

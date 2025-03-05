@@ -6,6 +6,7 @@ import {
   TextInput,
   View,
 } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
 export default function Input() {
   const [number, setNumber] = useState("");
@@ -24,6 +25,8 @@ export default function Input() {
       setValidate(false);
     }
   };
+
+  const nav = useNavigation();
 
   return (
     <View style={styles.layout}>
@@ -44,8 +47,12 @@ export default function Input() {
         </Text>
       ) : null}
       <TouchableOpacity
-        style={styles.button}
-        onPress={() => console.log("Button Pressed!")}
+        style={[styles.button, !validate && { backgroundColor: "gray" }]}
+        onPress={() => {
+          if (validate == true) {
+            nav.navigate("HomeScreen", { phoneNumber: number });
+          }
+        }}
       >
         <Text style={styles.buttonText}>Tiếp tục</Text>
       </TouchableOpacity>
